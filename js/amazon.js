@@ -46,10 +46,35 @@ products.forEach((value) => {
                 Added
             </div>
 
-            <button class="add-to-cart-button button-primary">
+            <button class="add-to-cart-button button-primary js-add-to-cart"  data-product-id="${value.id}">
                 Add to Cart
             </button>
             </div>
     `;
 container.innerHTML = storeHtml;
-})
+});
+
+document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+    button.addEventListener('click', () => {
+        alert('added')
+        const productId = button.dataset.productId; //data-produc-name in button add to cart
+        //check if the quantity is more than 1, if true it will run this code
+        //and if not true, it will run the else statement (1 quantity only)
+        console.log(productId)
+        let matchingItem; //3
+        cart.forEach((value) => { //1
+            if (productId === value.productId) { //2
+                matchingItem = value;//4
+            }
+        });
+        if (matchingItem) { //5
+            matchingItem.quatity += 1; //6
+        } else { //7
+            cart.push({ //8
+                productId: productId, //9
+                quatity: 1 //10
+             });
+        }
+        console.log(cart)
+    });
+});
