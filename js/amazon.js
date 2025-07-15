@@ -56,13 +56,12 @@ container.innerHTML = storeHtml;
 
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click', () => {
-        alert('added')
         const productId = button.dataset.productId; //data-produc-name in button add to cart
         //check if the quantity is more than 1, if true it will run this code
         //and if not true, it will run the else statement (1 quantity only)
-        console.log(productId)
+
         let matchingItem; //3
-        cart.forEach((value) => { //1
+        cart.forEach((value) => { //1 assign a parameter
             if (productId === value.productId) { //2
                 matchingItem = value;//4
             }
@@ -75,6 +74,13 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
                 quatity: 1 //10
              });
         }
-        console.log(cart)
+        //CART QUANTITY IN THE BASKET
+        let cartQuantity = 0; //2
+        cart.forEach((item) => { //1
+            cartQuantity += item.quatity //3
+        });
+
+        document.querySelector('.js-cart-quantity').innerHTML = cartQuantity
+
     });
 });
