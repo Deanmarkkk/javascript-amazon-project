@@ -25,7 +25,7 @@ products.forEach((value) => {
             </div>
 
             <div class="product-quantity-container">
-                <select>
+                <select class="js-quantity-selector-${value.id}">
                 <option selected value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -57,9 +57,12 @@ container.innerHTML = storeHtml;
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click', () => {
         const productId = button.dataset.productId; //data-produc-name in button add to cart
+
+        const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+        let quantity = Number(quantitySelector.value);
+
         //check if the quantity is more than 1, if true it will run this code
         //and if not true, it will run the else statement (1 quantity only)
-
         let matchingItem; //3
         cart.forEach((value) => { //1 assign a parameter
             if (productId === value.productId) { //2
@@ -67,11 +70,11 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
             }
         });
         if (matchingItem) { //5
-            matchingItem.quatity += 1; //6
+            matchingItem.quatity += quantity; //6
         } else { //7
             cart.push({ //8
                 productId: productId, //9
-                quatity: 1 //10
+                quatity: quantity //10
              });
         }
         //CART QUANTITY IN THE BASKET
@@ -81,6 +84,6 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
         });
 
         document.querySelector('.js-cart-quantity').innerHTML = cartQuantity
-
+        console.log(cart)
     });
 });
