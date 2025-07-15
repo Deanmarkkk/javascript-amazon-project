@@ -41,7 +41,7 @@ products.forEach((value) => {
 
             <div class="product-spacer"></div>
 
-            <div class="added-to-cart">
+            <div class="added-to-cart js-add-txt-${value.id}">
                 <img src="images/icons/checkmark.png">
                 Added
             </div>
@@ -58,8 +58,8 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click', () => {
         const productId = button.dataset.productId; //data-produc-name in button add to cart
 
-        const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
-        let quantity = Number(quantitySelector.value);
+        const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`); //13a, 13b
+        let quantity = Number(quantitySelector.value); //13c, 13d
 
         //check if the quantity is more than 1, if true it will run this code
         //and if not true, it will run the else statement (1 quantity only)
@@ -70,11 +70,11 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
             }
         });
         if (matchingItem) { //5
-            matchingItem.quatity += quantity; //6
+            matchingItem.quatity += quantity; //6, 13e
         } else { //7
             cart.push({ //8
                 productId: productId, //9
-                quatity: quantity //10
+                quatity: quantity //10, 13e
              });
         }
         //CART QUANTITY IN THE BASKET
@@ -84,6 +84,8 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
         });
 
         document.querySelector('.js-cart-quantity').innerHTML = cartQuantity
-        console.log(cart)
+
+        const addedTxt = document.querySelector(`.js-add-txt-${productId}`); //13i, 13j
+        addedTxt.classList.add('added-text'); //13k
     });
 });

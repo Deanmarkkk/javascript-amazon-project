@@ -656,5 +656,21 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+  { //13g
+    id: "id1",
+    image: "https://istore.ph/cdn/shop/files/iPhone_16_Pro_Max_Black_Titanium_PDP_Image_Position_1a_Black_Titanium_Color__ROSA-EN.jpg?v=1728460045",
+    name: "Iphone 16 Pro Max",
+    rating: {
+      stars: 5,
+      count: 357
+    },
+    priceCents: 10119000,
+    keywords: [
+      "phone",
+      "iphone",
+      "gadget",
+      "android"
+    ]
   }
 ];
