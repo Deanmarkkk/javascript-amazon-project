@@ -1,5 +1,6 @@
-import {cart as myCart} from "../data/cart.js"; //renamed the cart variable in cart.js into myCart
-const cart = []; //new Created by module
+import {products} from "../data/products.js"; //get the products.js without script src in html
+import {cart} from "../data/cart.js"; //renamed the cart variable in cart.js into myCart
+//const cart = []; //new Created by module
 
 const container = document.querySelector('.js-products-grid');
 let storeHtml = '';
