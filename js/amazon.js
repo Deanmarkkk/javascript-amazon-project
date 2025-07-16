@@ -1,6 +1,9 @@
 import {products} from "../data/products.js"; //get the products.js without script src in html
-import {cart} from "../data/cart.js"; //renamed the cart variable in cart.js into myCart
+import {cart, addtoCart} from '../data/cart.js';
+//import * as cartModule from "../data/cart.js";
 //const cart = []; //new Created by module
+//cartModule.cart;
+//cartModule.addtoCart;
 
 const container = document.querySelector('.js-products-grid');
 let storeHtml = '';
@@ -58,51 +61,42 @@ products.forEach((value) => {
 container.innerHTML = storeHtml;
 });
 
-document.querySelectorAll('.js-add-to-cart').forEach((button) => {
-    button.addEventListener('click', () => {
-        const productId = button.dataset.productId; //data-produc-name in button add to cart
-
-        const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`); //13a, 13b
-        let quantity = Number(quantitySelector.value); //13c, 13d
-
-        //check if the quantity is more than 1, if true it will run this code
-        //and if not true, it will run the else statement (1 quantity only)
-        let matchingItem; //3
-        cart.forEach((value) => { //1 assign a parameter
-            if (productId === value.productId) { //2
-                matchingItem = value;//4
-            }
-        });
-        if (matchingItem) { //5
-            matchingItem.quatity += quantity; //6, 13e
-        } else { //7
-            cart.push({ //8
-                productId: productId, //9
-                quatity: quantity //10, 13e
-             });
-        }
-        //CART QUANTITY IN THE BASKET
+function cartQty() {
+    //CART QUANTITY IN THE BASKET
         let cartQuantity = 0; //2
         cart.forEach((item) => { //1
             cartQuantity += item.quatity //3
         });
 
         document.querySelector('.js-cart-quantity').innerHTML = cartQuantity
+}
 
-        const addedTxt = document.querySelector(`.js-add-txt-${productId}`); //13i, 13j
+function addedMessage(productId) {
+    const addedTxt = document.querySelector(`.js-add-txt-${productId}`); //13i, 13j
 
-        let popUp = false; //13m
-        let intervalId; //13m
+    let popUp = false; //13m
+    let intervalId; //13m
 
-        if (!popUp) {
-             addedTxt.classList.add('added-text'); //13k
-            clearTimeout(intervalId);
-            popUp = false; 
-        }
-        intervalId = setTimeout(() => { //13L
-            addedTxt.classList.remove('added-text')
-            }, 2000);
-            popUp = true;
+    if (!popUp) {
+            addedTxt.classList.add('added-text'); //13k
+        clearTimeout(intervalId);
+        popUp = false; 
+    }
+    intervalId = setTimeout(() => { //13L
+        addedTxt.classList.remove('added-text')
+        }, 2000);
+        popUp = true;
+}
+
+//main
+document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+    button.addEventListener('click', () => {
+        const productId = button.dataset.productId; //data-produc-name in button add to cart
+       
+        //first u need to set the parameter productId in functions
+        addtoCart(productId)
+        cartQty()
+        addedMessage(productId)
 
     });
 });
