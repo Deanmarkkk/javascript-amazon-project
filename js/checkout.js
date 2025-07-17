@@ -1,19 +1,18 @@
 import { cart } from "../data/cart.js";
-import { products } from "../data/products.js";
+import { products } from "../data/products.js";//1
 
-let storeHtml = '';
-cart.forEach((cartItem) => {
-    let productId = cartItem.productId;
+let storeHtml = ''; //4
+cart.forEach((cartItem) => { //2
+    let productId = cartItem.productId;//3
     
-    let matchingItem;
-    products.forEach((item) => {
-      if (item.id === productId) {
-        matchingItem = item
+    let matchingItem; //6
+    products.forEach((item) => { //7
+      if (item.id === productId) {//8
+        matchingItem = item //9
       }
     });
-    console.log(matchingItem);
-
-    storeHtml += `
+    //5
+    storeHtml += ` 
         <div class="cart-item-container">
             <div class="delivery-date">
               Delivery date: Tuesday, June 21
